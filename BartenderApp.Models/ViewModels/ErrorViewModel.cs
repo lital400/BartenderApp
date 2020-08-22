@@ -1,6 +1,6 @@
 using System;
 
-namespace BartenderApp.Models
+namespace BartenderApp.Models.ViewModels
 {
     public class ErrorViewModel
     {
