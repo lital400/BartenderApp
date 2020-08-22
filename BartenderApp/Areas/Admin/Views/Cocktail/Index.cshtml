@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BartenderApp.Models.Cocktail>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Cocktail Menu";
+}
+
+<br />
+<div class="row pb-3 backgroundWhite">
+
+    @foreach (var cocktail in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12  p-1" style="border:1px solid; border-radius: 5px;">
+                    <div class="card" style="border:0px;">
+                        <img src="@cocktail.ImageUrl" class="card-img-top rounded" />
+                        <div class="pl-1">
+                            <p class="card-title h5"><b>@cocktail.Name</b></p>
+                            <p class="card-title">@cocktail.Description</p>
+                        </div>
+                        <div style="padding-left:5px;">
+                            <p class="text-white">Price: <b class="">$@cocktail.Price.ToString("0.00")</b></p>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Order" class="btn btn-primary form-control" asp-route-id="@cocktail.Id">Order Cocktail</a>
+                        @*<a class="dropdown-item" href="#" onclick="filterOpportunities('')">Order Cocktail</a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
