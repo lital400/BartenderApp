@@ -11,10 +11,11 @@ namespace BartenderApp.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public int CocktailId { get; set; }
-        [ForeignKey("CocktailId")]
-        public Cocktail Cocktail { get; set; }
+        [Display(Name = "Cocktail Name")]
+        public string CocktailName { get; set; }
+
+        [Display(Name = "Ready for Pickup")]
+        public bool IsReady { get; set; }
 
     }
 }

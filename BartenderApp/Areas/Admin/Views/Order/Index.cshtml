@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BartenderApp.Models.Order>
+
+@{
+    ViewData["Title"] = "Order Queue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*  <p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+
+<br />
+<h1>Order Queue</h1>
+<br />
+<table class="table table-striped table-bordered table-hover table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CocktailName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsReady)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CocktailName)
+                </td>
+                <td>
+                    @if (item.IsReady)
+                    {
+                        <i class="fas fa-check text-center"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-times text-center"></i>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Ready" class="btn btn-primary" asp-route-id="@item.Id">Ready for pickup</a>
+                    <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.Id">Delete</a>
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                      <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

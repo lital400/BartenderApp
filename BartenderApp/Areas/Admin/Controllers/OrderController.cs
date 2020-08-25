@@ -12,41 +12,38 @@ using BartenderApp.DataAccess.Repository.IRepository;
 namespace BartenderApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CocktailController : Controller
+    public class OrderController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CocktailController(ApplicationDbContext db, IUnitOfWork unitOfWork)
+        public OrderController(ApplicationDbContext db, IUnitOfWork unitOfWork)
         {
             _db = db;
             _unitOfWork = unitOfWork;
         }
 
-        // GET: Admin/Cocktail
+        // GET: Admin/Order
         public async Task<IActionResult> Index()
         {
-            return View(await _db.Cocktails.ToListAsync());
+            return View(await _db.Orders.ToListAsync());
         }
 
-
-        public IActionResult Insert(int id)
+        public IActionResult Ready(int id)
         {
-            Cocktail cocktail = new Cocktail();
-            cocktail = _unitOfWork.Cocktail.Get(id);
-
             Order order = new Order();
-            order.CocktailName = cocktail.Name;
-            order.IsReady = false;
+            order = _unitOfWork.Order.Get(id);
+            order.IsReady = true;
 
-            _unitOfWork.Order.Add(order);
+            _unitOfWork.Order.Update(order);
             _unitOfWork.Save();
-            return View("Confirm");
+
+            IEnumerable<Order> ordertList = _unitOfWork.Order.GetAll();
+            return View("Index", ordertList);
 
         }
 
-
-        // GET: Admin/Cocktail/Details/5
+        // GET: Admin/Order/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,38 +51,37 @@ namespace BartenderApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var cocktail = await _db.Cocktails
+            var order = await _db.Orders
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cocktail == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(cocktail);
+            return View(order);
         }
 
-        // GET: Admin/Cocktail/Create
+        // GET: Admin/Order/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Cocktail/Create
+        // POST: Admin/Order/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,ImageUrl")] Cocktail cocktail)
+        public async Task<IActionResult> Create([Bind("Id,CocktailName,IsReady")] Order order)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(cocktail);
+                _db.Add(order);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cocktail);
+            return View(order);
         }
 
-
-        // GET: Admin/Cocktail/Edit/5
+        // GET: Admin/Order/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,20 +89,20 @@ namespace BartenderApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var cocktail = await _db.Cocktails.FindAsync(id);
-            if (cocktail == null)
+            var order = await _db.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return View(cocktail);
+            return View(order);
         }
 
-        // POST: Admin/Cocktail/Edit/5
+        // POST: Admin/Order/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,ImageUrl")] Cocktail cocktail)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CocktailName,IsReady")] Order order)
         {
-            if (id != cocktail.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -115,12 +111,12 @@ namespace BartenderApp.Areas.Admin.Controllers
             {
                 try
                 {
-                    _db.Update(cocktail);
+                    _db.Update(order);
                     await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CocktailExists(cocktail.Id))
+                    if (!OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -131,10 +127,10 @@ namespace BartenderApp.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cocktail);
+            return View(order);
         }
 
-        // GET: Admin/Cocktail/Delete/5
+        // GET: Admin/Order/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,30 +138,30 @@ namespace BartenderApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var cocktail = await _db.Cocktails
+            var order = await _db.Orders
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cocktail == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(cocktail);
+            return View(order);
         }
 
-        // POST: Admin/Cocktail/Delete/5
+        // POST: Admin/Order/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cocktail = await _db.Cocktails.FindAsync(id);
-            _db.Cocktails.Remove(cocktail);
+            var order = await _db.Orders.FindAsync(id);
+            _db.Orders.Remove(order);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CocktailExists(int id)
+        private bool OrderExists(int id)
         {
-            return _db.Cocktails.Any(e => e.Id == id);
+            return _db.Orders.Any(e => e.Id == id);
         }
     }
 }

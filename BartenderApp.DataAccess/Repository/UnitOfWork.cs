@@ -14,10 +14,12 @@ namespace BartenderApp.DataAccess.Repository
         {
             _db = db;
             Cocktail = new CocktailRepository(_db);
+            Order = new OrderRepository(_db);
             SP_Call = new SP_Call(_db);
         }
 
         public ICocktailRepository Cocktail { get; private set; }
+        public IOrderRepository Order { get; private set; }
         public ISP_Call SP_Call { get; private set; }
 
         public void Dispose()
