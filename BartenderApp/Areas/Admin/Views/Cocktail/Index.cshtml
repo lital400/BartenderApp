@@ -7,10 +7,10 @@
 
 
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
-
+</p>*@
+<br/>
 <div class="row pb-3 backgroundWhite">
         @foreach (var cocktail in Model)
         {
@@ -28,17 +28,15 @@
                             </div>
                         </div>
                         <div>
-                           
                             <a asp-action="Insert" class="btn btn-primary form-control" asp-route-id="@cocktail.Id">Order Cocktail</a>
                            
-                            <a asp-action="Edit" asp-route-id="@cocktail.Id">Edit</a>
+                            @*<a asp-action="Edit" asp-route-id="@cocktail.Id">Edit</a>
                             <a asp-action="Details" asp-route-id="@cocktail.Id">Details</a>
-                            <a asp-action="Delete" asp-route-id="@cocktail.Id">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@cocktail.Id">Delete</a>*@
                         </div>
                     </div>
                 </div>
             </div>
-            
 }
 </div>
 

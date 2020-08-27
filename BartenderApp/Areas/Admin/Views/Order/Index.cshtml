@@ -27,33 +27,40 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CocktailName)
-                </td>
-                <td>
-                    @if (item.IsReady)
-                    {
-                        <i class="fas fa-check text-center"></i>
-                    }
-                    else
-                    {
-                        <i class="fas fa-times text-center"></i>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Ready" class="btn btn-primary" asp-route-id="@item.Id">Ready for pickup</a>
-                    <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.Id">Delete</a>
-                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                      <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                </td>
-            </tr>
-        }
-    </tbody>
+    @if (Model.Count() > 0)
+    {
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CocktailName)
+                    </td>
+                    <td>
+                        @if (item.IsReady)
+                        {
+                            <i class="fas fa-check text-center"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-times text-center"></i>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Ready" class="btn btn-primary" asp-route-id="@item.Id">Ready for pickup</a>
+                        <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.Id">Delete</a>
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <p class="text-danger">The order queue is empty</p>
+    }
 </table>

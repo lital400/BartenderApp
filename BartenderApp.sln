@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BartenderApp", "BartenderApp\BartenderApp.csproj", "{5AB57604-1271-4B54-B0B1-551260C4CFFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BartenderApp", "BartenderApp\BartenderApp.csproj", "{5AB57604-1271-4B54-B0B1-551260C4CFFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BartenderApp.DataAccess", "BartenderApp.DataAccess\BartenderApp.DataAccess.csproj", "{2EBACE66-D8B3-475E-ABFC-0460E8E825D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BartenderApp.DataAccess", "BartenderApp.DataAccess\BartenderApp.DataAccess.csproj", "{2EBACE66-D8B3-475E-ABFC-0460E8E825D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BartenderApp.Models", "BartenderApp.Models\BartenderApp.Models.csproj", "{8CF464B6-14E8-422D-83A6-6DF7A7476768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BartenderApp.Models", "BartenderApp.Models\BartenderApp.Models.csproj", "{8CF464B6-14E8-422D-83A6-6DF7A7476768}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
