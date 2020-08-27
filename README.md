@@ -8,6 +8,17 @@ CIS-4327 - IS Senior Project I
 Bartender Application Assignment
 ```
 
+## How to install?
+
+```
+Download the full project and change the connection string 
+in the appsettings.json file to your local DB server name.
+I have implemented a database initializer to populate the cocktail menu, 
+so it will create a database with cocktail entities for you as soon as you run the application.
+The order queue will be empty until a customer places an order. 
+
+```
+
 ## Description
 
 ```
@@ -32,13 +43,3 @@ User accounts are not implemented.
 CRUD operations are implemented but commented out due to the assignment requirements. 
 ```
 
-## How to install?
-
-```
-Download the full project and change the connection string 
-in the appsettings.json file to your local DB server name.
-I have implemented a database initializer to populate the cocktail menu, 
-so it will create a database with cocktail entities for you as soon as you run the application.
-The order queue will be empty until a customer places an order. 
-
-```
