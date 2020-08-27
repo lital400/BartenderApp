@@ -12,7 +12,7 @@ Bartender Application Assignment
 
 ```
 Download the full project and change the connection string 
-in the appsettings.json file to your local DB server name.
+in the **appsettings.json** file to your local DB server name.
 I have implemented a database initializer to populate the cocktail menu, 
 so it will create a database with cocktail entities for you as soon as you run the application.
 The order queue will be empty until a customer places an order. 
